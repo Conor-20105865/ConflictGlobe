@@ -22,4 +22,7 @@
     <string name="short_description_hint">Short description</string>
     <string name="save">Save</string>
     <string name="enter_valid_details_toast">Enter a name/region and valid coordinates.</string>
+
+    <string name="not_set">Not set</string>
+    <string name="detail_format">Region: %1$s\nStart date: %2$s\nStatus: %3$s\nSeverity: %4$s\nCoordinates: %5$s, %6$s\n\n%7$s</string>
 </resources>
