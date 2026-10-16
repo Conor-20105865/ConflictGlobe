@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 
 // Screen that displays the details of a specific conflict
 class ConflictDetailActivity : AppCompatActivity() {
@@ -19,11 +20,30 @@ class ConflictDetailActivity : AppCompatActivity() {
         // Get the conflict ID passed in from the previous screen
         id = intent.getLongExtra("id", -1)
 
+        //clicky listener for edit
         findViewById<Button>(R.id.editButton).setOnClickListener {
             startActivity(
                 Intent(this, AddEditConflictActivity::class.java)
                     .putExtra("id", id)
             )
+        }
+        //clicky listener for delete
+        findViewById<Button>(R.id.deleteButton).setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.delete_dialog_title))
+                .setMessage(getString(R.string.delete_dialog_message))
+                .setNegativeButton(getString(R.string.cancel), null)
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
+
+                    ConflictStore.conflicts.removeAll {
+                        it.id == id
+                    }
+
+                    ConflictStore.save(this)
+
+                    finish()
+                }
+                .show()
         }
     }
 
