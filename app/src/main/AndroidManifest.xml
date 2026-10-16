@@ -24,6 +24,10 @@
         <activity
             android:name=".AddEditConflictActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ConflictDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
