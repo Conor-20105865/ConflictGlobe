@@ -34,4 +34,6 @@
     <string name="cancel">Cancel</string>
 
     <string name="search_hint">Search conflicts or regions</string>
+
+    <string name="all_statuses">All statuses</string>
 </resources>

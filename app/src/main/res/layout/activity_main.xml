@@ -12,6 +12,11 @@
         android:hint="@string/search_hint"
         android:inputType="text" />
 
+    <Spinner
+        android:id="@+id/statusFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/conflictList"
         android:layout_width="match_parent"
