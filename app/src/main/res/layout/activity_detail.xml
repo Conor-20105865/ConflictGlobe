@@ -17,5 +17,11 @@
             android:layout_height="wrap_content"
             android:textSize="17sp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/editButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit" />
+
     </LinearLayout>
 </ScrollView>
