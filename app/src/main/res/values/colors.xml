@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Blue -->
+    <color name="primary">#0062FF</color>
+    <!-- Darker Blue -->
+    <color name="primary_dark">#001347</color>
+    <!-- Crimson Red for urgency -->
+    <color name="accent">#DC2626</color>
 </resources>
