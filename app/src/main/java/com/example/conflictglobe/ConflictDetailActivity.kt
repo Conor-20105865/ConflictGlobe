@@ -3,6 +3,8 @@ package com.example.conflictglobe
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.widget.Button
 
 // Screen that displays the details of a specific conflict
 class ConflictDetailActivity : AppCompatActivity() {
@@ -16,6 +18,13 @@ class ConflictDetailActivity : AppCompatActivity() {
 
         // Get the conflict ID passed in from the previous screen
         id = intent.getLongExtra("id", -1)
+
+        findViewById<Button>(R.id.editButton).setOnClickListener {
+            startActivity(
+                Intent(this, AddEditConflictActivity::class.java)
+                    .putExtra("id", id)
+            )
+        }
     }
 
     override fun onResume() {
