@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
+import java.util.Calendar
+import java.util.Locale
 
 //screen for adding and editing a conflict entry
 class AddEditConflictActivity : AppCompatActivity() {
@@ -25,6 +28,7 @@ class AddEditConflictActivity : AppCompatActivity() {
         //find dropdown spinners
         val status = findViewById<Spinner>(R.id.statusSpinner)
         val severity = findViewById<Spinner>(R.id.severitySpinner)
+        val dateBtn = findViewById<Button>(R.id.dateButton)
         //populate status dropdown options
         val statuses = listOf(
             getString(R.string.status_active),
@@ -50,6 +54,29 @@ class AddEditConflictActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_dropdown_item,
             severities
         )
+
+        dateBtn.setOnClickListener {
+            val c = Calendar.getInstance()
+
+            DatePickerDialog(
+                this,
+                { _, year, month, day ->
+                    date = String.format(
+                        Locale.US,
+                        "%02d/%02d/%04d",
+                        day,
+                        month + 1,
+                        year
+                    )
+
+                    dateBtn.text = date
+                },
+                c[Calendar.YEAR],
+                c[Calendar.MONTH],
+                c[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
+        
         //handle clicky on save button
         findViewById<Button>(R.id.saveButton).setOnClickListener {
             //make conflict object from form inputs
