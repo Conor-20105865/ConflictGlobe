@@ -20,6 +20,7 @@ class AddEditConflictActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         id = intent.getLongExtra("id", -1)
 
@@ -144,5 +145,10 @@ class AddEditConflictActivity : AppCompatActivity() {
 
             finish()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
