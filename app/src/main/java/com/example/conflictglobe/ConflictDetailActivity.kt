@@ -1,11 +1,11 @@
 package com.example.conflictglobe
 
-import android.os.Bundle
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 
 // Screen that displays the details of a specific conflict
 class ConflictDetailActivity : AppCompatActivity() {
@@ -16,6 +16,7 @@ class ConflictDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Get the conflict ID passed in from the previous screen
         id = intent.getLongExtra("id", -1)
@@ -85,5 +86,10 @@ class ConflictDetailActivity : AppCompatActivity() {
                 lonStr,
                 conflict.description
             )
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
