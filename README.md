@@ -4,6 +4,10 @@ ConflictGlobe is an Android application written in Kotlin for recording and trac
 
 The application allows users to create, view, edit, delete, search and filter conflict records while storing data locally using JSON persistence.
 
+## GITDIAGRAM
+
+https://gitdiagram.com/conor-20105865/conflictglobe
+
 ## Features
 
 - Add new conflict records
