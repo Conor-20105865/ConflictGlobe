@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Conflict globe</string>
+    <string name="app_title">Conflict Globe — Tracker</string>
+    <string name="add_conflict">Add conflict</string>
+
+    <string name="status_active">Active</string>
+    <string name="status_ceasefire">Ceasefire</string>
+    <string name="status_ended">Ended</string>
+
+    <string name="severity_low">Low</string>
+    <string name="severity_medium">Medium</string>
+    <string name="severity_high">High</string>
+    <string name="severity_critical">Critical</string>
+
+    <string name="conflict_name_hint">Conflict name *</string>
+    <string name="country_region_hint">Country / region *</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="status_label">Status</string>
+    <string name="severity_label">Severity</string>
+    <string name="latitude_hint">Latitude (-90 to 90)</string>
+    <string name="longitude_hint">Longitude (-180 to 180)</string>
+    <string name="short_description_hint">Short description</string>
+    <string name="save">Save</string>
+    <string name="enter_valid_details_toast">Enter a name/region and valid coordinates.</string>
 </resources>
