@@ -8,6 +8,9 @@ The application allows users to create, view, edit, delete, search and filter co
 
 https://gitdiagram.com/conor-20105865/conflictglobe
 
+## Explanation video
+[![Watch a one-minute video tour of conflictglobe](https://gitdiagram.com/video-badge.svg)](https://gitdiagram.com/conor-20105865/conflictglobe/video)
+
 ## Features
 
 - Add new conflict records
