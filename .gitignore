@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Local Android Studio deployment settings
+/.idea/deploymentTargetSelector.xml
