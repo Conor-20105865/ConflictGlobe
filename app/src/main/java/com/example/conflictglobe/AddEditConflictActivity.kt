@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 import java.util.Locale
-
+//handles the form used for adding and editing records
 //screen for adding and editing a conflict entry
 class AddEditConflictActivity : AppCompatActivity() {
 

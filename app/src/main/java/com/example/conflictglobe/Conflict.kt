@@ -1,5 +1,6 @@
 package com.example.conflictglobe
 
+//conflict data model. and validation rules
 data class Conflict(
     val id: Long = System.currentTimeMillis(),
     var name: String,

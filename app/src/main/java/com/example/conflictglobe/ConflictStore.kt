@@ -4,6 +4,7 @@ import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
 
+//handles loading and saving and finding conflict records conflict data
 //manages save and load conflict data
 object ConflictStore {
 

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
+//connects conflict records to the recycler view list (show full conflict list on main page)
 // Adapter to manage and display a list of Conflict items in a RecyclerView
 class ConflictAdapter(
     private var items: List<Conflict>,

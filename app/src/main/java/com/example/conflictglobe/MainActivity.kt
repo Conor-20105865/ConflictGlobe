@@ -12,7 +12,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+//displays conflicts and handles search and filter
 // main screen to show list of conflicts
 class MainActivity : AppCompatActivity() {
 

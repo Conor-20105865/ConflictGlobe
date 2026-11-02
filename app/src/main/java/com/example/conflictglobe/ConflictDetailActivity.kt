@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
+//displays a conflicts full info with edit and delet options
 // Screen that displays the details of a specific conflict
 class ConflictDetailActivity : AppCompatActivity() {
 
