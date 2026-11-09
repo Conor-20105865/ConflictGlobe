@@ -1,12 +1,15 @@
 package com.example.conflictglobe
 
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 import java.util.Locale
@@ -16,6 +19,8 @@ class AddEditConflictActivity : AppCompatActivity() {
 
     private var id: Long = -1
     private var date = ""
+    private var selectedImageUri: Uri? = null
+    private lateinit var imagePreview: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,28 @@ class AddEditConflictActivity : AppCompatActivity() {
         val lat = findViewById<EditText>(R.id.latInput)
         val lon = findViewById<EditText>(R.id.lonInput)
         val desc = findViewById<EditText>(R.id.descriptionInput)
+        imagePreview = findViewById(R.id.imageViewAdd)
+
+        val imagePicker =
+            registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+                if (uri != null) {
+                    try {
+                        contentResolver.takePersistableUriPermission(
+                            uri,
+                            android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        )
+                    } catch (_: SecurityException) {
+
+                    }
+
+                    selectedImageUri = uri
+                    imagePreview.setImageURI(uri)
+                }
+            }
+
+        findViewById<Button>(R.id.imagePickButton).setOnClickListener {
+            imagePicker.launch(arrayOf("image/*"))
+        }
 
         //find dropdown spinners
         val status = findViewById<Spinner>(R.id.statusSpinner)
@@ -80,6 +107,13 @@ class AddEditConflictActivity : AppCompatActivity() {
             lat.setText(c.latitude?.toString() ?: "")
             lon.setText(c.longitude?.toString() ?: "")
             desc.setText(c.description)
+
+            selectedImageUri = c.imageUri?.let { Uri.parse(it) }
+            if (selectedImageUri != null) {
+                imagePreview.setImageURI(selectedImageUri)
+            } else {
+                imagePreview.setImageResource(android.R.drawable.ic_menu_gallery)
+            }
         }
 
         dateBtn.setOnClickListener {
@@ -106,44 +140,45 @@ class AddEditConflictActivity : AppCompatActivity() {
 
         //handle clicky on save button
         findViewById<Button>(R.id.saveButton).setOnClickListener {
-            //make conflict object from form inputs
-            val conflict = Conflict(
-                id = if (id == -1L) System.currentTimeMillis() else id,
-                name = name.text.toString().trim(),
-                region = region.text.toString().trim(),
-                startDate = date,
-                status = status.selectedItem.toString(),
-                severity = severity.selectedItem.toString(),
-                latitude = lat.text.toString().toDoubleOrNull(),
-                longitude = lon.text.toString().toDoubleOrNull(),
-                description = desc.text.toString().trim()
-            )
+            try {
+                //make conflict object from form inputs
+                val conflict = Conflict(
+                    id = if (id == -1L) System.currentTimeMillis() else id,
+                    name = name.text.toString().trim(),
+                    region = region.text.toString().trim(),
+                    startDate = date,
+                    status = status.selectedItem.toString(),
+                    severity = severity.selectedItem.toString(),
+                    latitude = lat.text.toString().toDoubleOrNull(),
+                    longitude = lon.text.toString().toDoubleOrNull(),
+                    description = desc.text.toString().trim(),
+                    imageUri = selectedImageUri?.toString()
+                )
 
-            //validate before actually saving
-            if (!conflict.isValid()) {
+                //validate before actually saving
+                conflict.validate()
+
+                //update existing entry or add as new
+                val index = ConflictStore.conflicts.indexOfFirst {
+                    it.id == conflict.id
+                }
+
+                if (index >= 0) {
+                    ConflictStore.conflicts[index] = conflict
+                } else {
+                    ConflictStore.conflicts.add(conflict)
+                }
+
+                ConflictStore.save(this)
+
+                finish()
+            } catch (e: IllegalArgumentException) {
                 Toast.makeText(
                     this,
-                    getString(R.string.enter_valid_details_toast),
+                    e.message ?: "Please check the entered values.",
                     Toast.LENGTH_LONG
                 ).show()
-
-                return@setOnClickListener
             }
-
-            //update existing entry or add as new
-            val index = ConflictStore.conflicts.indexOfFirst {
-                it.id == conflict.id
-            }
-
-            if (index >= 0) {
-                ConflictStore.conflicts[index] = conflict
-            } else {
-                ConflictStore.conflicts.add(conflict)
-            }
-
-            ConflictStore.save(this)
-
-            finish()
         }
     }
 

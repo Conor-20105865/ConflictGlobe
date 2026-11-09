@@ -45,7 +45,8 @@ object ConflictStore {
                         .takeUnless { it.isNaN() },
                     longitude = o.optDouble("longitude")
                         .takeUnless { it.isNaN() },
-                    description = o.optString("description")
+                    description = o.optString("description"),
+                    imageUri = o.optString("imageUri").takeUnless { it.isBlank() || it == "null" }
                 )
             )
         }
@@ -55,7 +56,7 @@ object ConflictStore {
     fun save(context: Context) {
         val arr = JSONArray()
 
-        //convert conflict objects to JSOn
+        //convert conflict objects to JSON
         conflicts.forEach { c ->
             arr.put(
                 JSONObject().apply {
@@ -68,6 +69,7 @@ object ConflictStore {
                     put("latitude", c.latitude ?: JSONObject.NULL)
                     put("longitude", c.longitude ?: JSONObject.NULL)
                     put("description", c.description)
+                    put("imageUri", c.imageUri ?: JSONObject.NULL)
                 }
             )
         }
@@ -83,4 +85,28 @@ object ConflictStore {
 
     // get one conflict by id
     fun byId(id: Long) = conflicts.find { it.id == id }
+
+    fun create(conflict: Conflict) {
+        conflict.validate()
+        conflicts.add(conflict)
+    }
+
+    fun update(conflict: Conflict): Boolean {
+        conflict.validate()
+        val found = byId(conflict.id)
+        return if (found != null) {
+            found.name = conflict.name
+            found.region = conflict.region
+            found.startDate = conflict.startDate
+            found.status = conflict.status
+            found.severity = conflict.severity
+            found.latitude = conflict.latitude
+            found.longitude = conflict.longitude
+            found.description = conflict.description
+            found.imageUri = conflict.imageUri
+            true
+        } else {
+            false
+        }
+    }
 }

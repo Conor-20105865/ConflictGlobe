@@ -96,6 +96,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        findViewById<View>(R.id.statsButton).setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    GlobeStatsActivity::class.java
+                )
+            )
+        }
+
         findViewById<View>(R.id.addButton).setOnClickListener {
             startActivity(
                 Intent(

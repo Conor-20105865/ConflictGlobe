@@ -1,9 +1,11 @@
 package com.example.conflictglobe
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 //connects conflict records to the recycler view list (show full conflict list on main page)
@@ -17,6 +19,7 @@ class ConflictAdapter(
     class Holder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
         val meta: TextView = view.findViewById(R.id.meta)
+        val markImage: ImageView = view.findViewById(R.id.markImage)
     }
 
     //loads item layout fiel
@@ -38,6 +41,17 @@ class ConflictAdapter(
         holder.name.text = conflict.name
         holder.meta.text =
             "${conflict.region} • ${conflict.status} • ${conflict.severity}"
+
+        val imageUri = conflict.imageUri
+        if (imageUri != null) {
+            try {
+                holder.markImage.setImageURI(Uri.parse(imageUri))
+            } catch (_: Exception) {
+                holder.markImage.setImageResource(android.R.drawable.ic_menu_gallery)
+            }
+        } else {
+            holder.markImage.setImageResource(android.R.drawable.ic_menu_gallery)
+        }
 
         //clicky clicky checker
         holder.itemView.setOnClickListener {

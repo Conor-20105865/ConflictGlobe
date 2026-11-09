@@ -36,4 +36,10 @@
     <string name="search_hint">Search conflicts or regions</string>
 
     <string name="all_statuses">All statuses</string>
+
+    <string name="select_image">Select Image</string>
+    <string name="view_globe_stats">Globe Statistics</string>
+    <string name="globe_stats_title">Conflict Globe Statistics</string>
+    <string name="total_conflicts_label">Total Conflicts: %d</string>
+    <string name="active_conflicts_label">Active Conflicts: %d</string>
 </resources>
